@@ -2,6 +2,12 @@
 # -*- ENCODING: UTF-8 -*-
 
 echo -e '\n'
+echo -e '\e[1;37m ACCIÓN PREVENTIVA: DETENIENDO CONTENEDORES \e[0m \n'
+docker stop php 
+docker stop symfony-mysql
+docker stop symfony-nginx
+
+echo -e '\n'
 echo -e '\e[1;34m INICIANDO DESPLIEGE \e[0m \n'
 docker-compose up -d --build 
 
@@ -20,7 +26,7 @@ docker exec php symfony check:requirements
 
 if [ $? != 0 ];
 then
-    echo -e '\n \e[1;31m ERROR: FALLO AL COMPROBAR REQUISITOS DE SYMFONY. ABORTANDO \e[0m \n'
+    echo -e '\n \e[1;31m ERROR: FALLO AL COMPROBAR REQUISITOS DE SYMFONY . ABORTANDO \e[0m \n'
     exit 1
 else
     echo -e '\n \e[1;32m REQUISITOS OK \e[0m \n'
