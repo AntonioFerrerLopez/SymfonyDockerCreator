@@ -33,6 +33,7 @@ services:
         environment:
             GIT_USER_NAME: desdeDockerCompose
 
+
     symfony-nginx:
         container_name: symfony-nginx
         image: nginx:stable-alpine

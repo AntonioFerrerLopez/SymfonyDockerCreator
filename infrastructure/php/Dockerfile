@@ -11,7 +11,6 @@ ENV GIT_USER_SURNAME ${GIT_USER_SURNAME}
 ENV GIT_USER_EMAIL ${GIT_USER_EMAIL}
 ENV SYMFONY_APP_NAME ${SYMFONY_APP_NAME}
 
-
 RUN apt update \
     && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
     && docker-php-ext-install intl opcache pdo pdo_mysql \
@@ -19,6 +18,18 @@ RUN apt update \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
+
+
+# zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so
+RUN pecl install xdebug
+RUN echo 'zend_extension = /usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so' >> /usr/local/etc/php/php.ini
+RUN touch /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.mode=debug >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.start_with_request=yes >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.discover_client_host=yes >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.client_port=9003 >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.client_host=host.docker.internal >> /usr/local/etc/php/conf.d/xdebug.ini; 
+
 
 WORKDIR /var/www/symfony_docker
 
