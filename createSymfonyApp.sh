@@ -42,9 +42,23 @@ then
     exit 1
    
 else
-  echo -e '\n \e[1;32m FIN DEL PROCESO. listo !!!  revise la carpeta ./app \e[0m \n'
+  echo -e '\n \e[1;32m FIN DEL PROCESO DE CREACIÓN. listo !!!  revise la carpeta ./app \e[0m \n'
   echo -e '\e[0;36m Puede acceder al proyecto desde http:://localhost:8080 \e[0m \n'
 fi
+
+echo -e '\n \e[1;32m COPIANDO docker-composer.yaml con servicios básicos  en APP >> ./app \e[0m \n'
+cp infrastructure/Symfony/docker-compose.yaml app/
+if [ $? != 0 ];
+then
+   echo -e '\e[1;31m ERROR AL COPIAR: infrastructure/Symfony/docker-compose.yaml. CONTINUANDO CON EL PROCESO \e[0m \n'
+
+else
+  echo -e '\n \e[1;32m TODO LISTO \e[0m \n'
+fi
+
+
+
+
 
 cat << "EOF"
           _ _,---._

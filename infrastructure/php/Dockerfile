@@ -45,7 +45,8 @@ RUN git config --global user.email ${GIT_USER_EMAIL}  \
     && git config --global user.name "${GIT_USER_NAME}$spacer${GIT_USER_SURNAME}"  
 
 
-
 RUN symfony check:requirements
 
 RUN symfony new ${SYMFONY_APP_NAME}
+
+
